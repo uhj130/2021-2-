@@ -1,0 +1,71 @@
+#include <stdio.h>
+#define MAX 10
+#define INPUT "배열에 추가할 원소? "
+#define DUPLICATED "해당 원소가 이미 [%d]에 존재합니다.\n"
+
+/*
+ * 원소의 중복 여부를 검사합니다.
+ * 검사 결과 만일 중복이라면 DUPLICATED를 출력합니다.
+ * 검사 결과 만일 중복이 아니라면 배열에 추가하고 add_elem()으로 배열의 원소를 출력합니다.
+ * 
+ * @param int set[] 현재까지 추가한 원소가 저장된 배열
+ * @param int *size 현재까지 추가한 원소의 개수, 원소를 추가하면 증가함
+ * @param int elem 이번에 추가하려는 원소
+ */
+void add_elem(int set[], int* size, int elem);
+
+/* 
+ * 현재 배열의 원소를 출력합니다.
+ *
+ * @param int set[] 현재까지 추가한 원소가 저장된 배열
+ * @param const int size 현재까지 추가한 원소의 개수
+ */
+void print_set(const int set[], const int size);
+
+int main(void) {
+	// 원소의 개수를 관리할 변수를 선언합니다.
+    int size=0;
+	// 원소를 저장할 배열을 선언합니다.
+    int set[MAX];
+	// 사용자로부터 입력받을 변수를 선언합니다.
+   int elem;
+	// 원소의 개수가 MAX보다 작은동안 반복합니다.
+	for(;size<MAX;){
+		// 입력 안내를 출력하고, 사용자로부터 입력을 받습니다.
+		printf(INPUT);
+    scanf("%d",&elem);
+		
+		// 만일 입력이 0이라면 반복문을 빠져나갑니다.
+	if(elem == 0)
+   break;
+		// 만일 입력이 0이 아니라면 add_elem()을 호출합니다.
+	else{
+    add_elem(set,&size,elem);
+  }
+
+}
+
+}
+
+void add_elem(int set[], int* size, int elem){
+  for(int i = 0; i < MAX; i++){
+    if(elem == set[i]){
+      printf(DUPLICATED,i);
+      return;
+    }
+  }
+      set[*size] = elem;
+      *size+=1;
+      print_set(set,*size);
+      
+}
+  
+
+
+void print_set(const int set[], const int size){
+  for(int i=0; i<size; i++){
+    printf("%d ",set[i]);
+  
+  }
+  printf("\n");
+}
