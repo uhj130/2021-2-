@@ -1,0 +1,72 @@
+#include <stdio.h>
+#define MAX 10
+#define INPUT "input numbers: "
+#define OUTPUT1 "array: "
+#define OUTPUT2 "\nmax: %d, idx_max: %d\nmin: %d, idx_min: %d\n"
+
+/* 배열에 포함된 원소를 화면에 출력하는 함수 
+ * 배열의 값들을 출력하기 전에 OUTPUT1을 출력해야 합니다.
+ * 배열의 값들 사이에는 공백이 들어가야 합니다.
+ * @param int arr[] 사용자의 입력값이 들어있는 배열
+ */
+void print_arr(int arr[]);
+
+/* 배열의 원소 중 최대값을 가진 원소와 최소값을 가진 원소를
+ * 인덱스와 함께 참조 호출로 반환하는 함수
+ * 배열의 첫 번째 인자를 min, max로 설정하고 두 번째 값부터 비교합니다.
+ * 반복문을 이용해 비교하다가 배열의 끝에 도달하면 종료합니다.
+ * @param int arr[] 사용자의 입력값이 들어있는 배열
+ * @param int *max 참조호출 시 최대값을 반환할 인자
+ * @param int *min 참조호출 시 최소값을 반환할 인자
+ * @param int *idx_max 참조호출 시 최대값의 인덱스를 반환할 인자
+ * @param int *idx_min 참조호출 시 최소값의 인덱스를 반환할 인자
+ */
+void find(int arr[], int* max, int* min, int* idx_max, int* idx_min);
+
+int main(void) {
+
+	// 입력 안내 문구를 출력합니다.
+    printf(INPUT);
+	// 반복문을 이용해 값을 입력받습니다.
+  int arr[MAX]; int max , min , idx_max , idx_min;
+   for(int i=0; i<MAX; i++){
+     scanf("%d",&arr[i]);
+   }
+ 
+
+	// find() 함수를 이용해 최대값, 최소값, 인덱스들을 받아옵니다.
+   find(arr,&max,&min,&idx_max,&idx_min);
+	// print_arr() 함수를 이용해 배열을 출력합니다.
+  print_arr(arr);
+	// OUTPUT2를 이용해 최대값, 최소값, 인덱스들을 출력합니다.
+   printf(OUTPUT2,max,idx_max,min,idx_min);
+	return 0;
+}
+
+void print_arr(int arr[]){
+  printf(OUTPUT1);
+  for(int i=0; i<MAX; i++){
+    printf("%d ",arr[i]);
+  }
+  
+}
+
+void find(int arr[], int* max, int* min, int* idx_max, int* idx_min){ 
+*max = arr[0]; *idx_max=0;
+*min = arr[0]; *idx_min=0;
+for(int i=1; i<MAX; i++){
+  if(*max < arr[i]){
+   *max=arr[i];
+   *idx_max=i;
+  }
+}
+for(int j=1; j<MAX; j++){
+  if(*min > arr[j]){
+    *min = arr[j];
+    *idx_min=j;
+  }
+}
+
+
+
+}
