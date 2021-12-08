@@ -1,0 +1,45 @@
+#include <stdio.h>
+#define MAX 10
+#define INPUT "input numbers: "
+#define OUTPUT1 "array: "
+#define OUTPUT2 "max: %d\n"
+
+// 인자로 받은 배열을 화면에 출력하고, 마지막에 newline 문자를 출력한다.
+void print_arr(int arr[]);
+// 입력받은 배열에서 최대값을 찾아 call-by-reference로 반환한다.
+void find_max(int arr[], int* max);
+
+int main(){
+	// 최대값을 저장할 변수를 생성한다.
+  int max;
+	// 정수를 MAX개 저장할 수 있는 배열을 생성한다.
+  int arr[MAX];
+	// 입력 안내문을 출력한다.
+  printf(INPUT);
+	// 사용자로부터 MAX개의 정수를 입력받아 배열에 저장한다.
+    for(int i=0; i<MAX; i++){
+      scanf("%d",&arr[i]);
+    }
+
+	// print_arr()함수를 이용해 배열을 출력한다.
+     print_arr(arr);
+	// find_max()함수를 이용해 최대값을 call-by-reference로 받아온다.
+     find_max(arr,&max);
+     printf(OUTPUT2,max);
+	return 0; 
+}
+void print_arr(int arr[]){
+  printf(OUTPUT1);
+  for(int i=0; i<MAX; i++){
+    printf("%d ",arr[i]);
+  }
+  printf("\n");
+}
+
+void find_max(int arr[],int* max){
+  *max = arr[0];
+  for(int i=1; i<MAX; i++ ){
+    if(*max < arr[i])
+    *max = arr[i];
+  }
+}
